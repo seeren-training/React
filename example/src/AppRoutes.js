@@ -1,7 +1,7 @@
 import { useRoutes, Navigate } from "react-router-dom";
 
-import NotFound from "./NotFound/NotFound";
-import Tasks from "./Tasks/Tasks";
+import NotFound from "./features/not-found/NotFound";
+import Tasks from "./features/tasks/Tasks";
 
 function AppRoutes() {
   const routes = useRoutes([

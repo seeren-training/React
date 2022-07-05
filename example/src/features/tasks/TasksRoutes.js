@@ -1,8 +1,8 @@
 import { useRoutes } from "react-router-dom";
-import Task from "./Task/Task";
 
-import TaskCreate from "./TaskCreate/TaskCreate";
-import TaskList from "./TaskList/TaskList";
+import Task from "./task/Task";
+import TaskCreate from "./task-create/TaskCreate";
+import TaskList from "./task-list/TaskList";
 
 function TasksRoutes(props) {
   const routes = useRoutes([

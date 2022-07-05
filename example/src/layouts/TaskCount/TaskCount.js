@@ -4,7 +4,7 @@ import './TaskCount.scss';
 
 const TaskCount = (props) => {
 
-  const count = props.board.todo.length + props.board.doing.length + props.board.done.length;
+  const { count } = props;
 
   return (
     <section className="hero is-primary mb-4">
