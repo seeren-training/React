@@ -13,7 +13,7 @@ React (aussi appelé React.js ou ReactJS) est une bibliothèque JavaScript libre
 
 [React](https://fr.reactjs.org/)
 
-![image](./resources/react.png)
+![image](https://raw.githubusercontent.com/seeren-training/React/master/wiki/resources//react.png)
 
 ### 🏷️ **Releases**
 
@@ -70,4 +70,3 @@ cd my-app
 ```bash
 npm start
 ```
-
