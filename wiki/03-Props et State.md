@@ -42,7 +42,6 @@ const board = {
 };
 
 const Tasks = () => {
-  const [active, setActive] = useState(false);
   return (
     <TasksRoutes board={board} />
   );
@@ -164,27 +163,63 @@ Les Hooks sont arrivés avec React 16.8. Ils vous permettent de bénéficier d�
 
 Nous avons observé un hook d'etat, l'approche des hook permet de faire du réutilisable et d'isoler les états dans ce que l'on peut appeler des hook personnalsiés.
 
+*src/hooks/useNavHook.js*
+
 ```js
-function useFriendStatus(friendID) {  
+import { useState } from "react";
 
-  const [isOnline, setIsOnline] = useState(null);
+const useNavHook = () => {
 
-  function handleStatusChange(status) {
-    setIsOnline(status.isOnline);
-  }
+    const [isBurger, setBurger] = useState(false);
+    
+    const [currentItem, setCurrentItem] = useState('');
 
-  useEffect(() => {
-    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);
-    return () => {
-      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);
-    };
-  });
+    const toogleBurger = () => setBurger(() => !isBurger);
 
-  return isOnline;
-}
+    const activeItem = (name) => setCurrentItem(() => name);
+    
+    return [isBurger, toogleBurger, currentItem, activeItem];
+
+};
+
+export default useNavHook;
 ```
 
 Avec cette approche la déclaration et la modification de l'état est isolée.
+
+```js
+const Tasks = () => {
+
+  const [isBurger, toogleBurger, currentItem, activeItem] = useNavHook();
+
+  return (
+    <>
+      <nav className="navbar is-light" role="navigation" aria-label="main navigation">
+        <div className="navbar-brand">
+          <Link to="" className="navbar-item">Task App</Link>
+          <button className={(isBurger ? 'is-active' : '') + ' navbar-burger'} aria-label="menu" aria-expanded="false"
+            onClick={toogleBurger} >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
+        </div>
+        <div className={(isBurger ? 'is-active' : '') + ' navbar-menu'}>
+          <div className="navbar-end">
+            <div className="navbar-item">
+              <div className="buttons">
+                <Link to="" className={('' === currentItem ? 'is-active' : '') + ' navbar-item'} onClick={() => activeItem('')}>Task List</Link>
+                <Link to="create" className={('create' === currentItem ? 'is-active' : '') + ' navbar-item'} onClick={() => activeItem('create')}>Create Task</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <TasksRoutes />
+    </>
+  );
+}
+```
 
 [Custom Hook](https://fr.reactjs.org/docs/hooks-overview.html#building-your-own-hooks)
 
