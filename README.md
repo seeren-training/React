@@ -1,4 +1,4 @@
-# Raect - Maîtriser le Framework
+# React - Maîtriser le Framework
 
 ## Durée
 
